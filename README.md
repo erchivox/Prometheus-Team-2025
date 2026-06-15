@@ -87,7 +87,9 @@ Para mitigar este problema y acortar la plataforma al mínimo sin comprometer el
 
 Antes de pasar al software de manufactura industrial, se validaron estas ideas espaciales construyendo un boceto conceptual rápido en Tinkercad. Este entorno ágil permitió evaluar formas para el tren motriz trasero. Inicialmente se consideró una transmisión por correa dentada, pero las limitaciones de suministro para conseguir longitudes a la medida obligaron a descartarla. En su lugar, Tinkercad sirvió para consolidar la arquitectura de engranajes en paralelo, permitiendo rotar la posición del motor y comprobar que la reducción longitudinal del chasis era viable.
 
-![PROTOTIPO CONCEPTUAL EN TINKERCAD](other/bocetoBase2026.jpeg)
+![PROTOTIPO CONCEPTUAL EN TINKERCAD](other/PrototipoTinkercad2026.jpeg)
+![PROTOTIPO CONCEPTUAL EN TINKERCAD](other/PrototipoTinkercad2_2026.jpeg)
+![PROTOTIPO CONCEPTUAL EN TINKERCAD](other/prototipoComparado2026.jpeg)
 
 ---
 
