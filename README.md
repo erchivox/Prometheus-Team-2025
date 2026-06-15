@@ -1,6 +1,32 @@
 # Prometheus Team - Temporada 2026
 Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
 
+### Componentes de Control, Detección e Interfaz
+
+| Imagen | Nombre de Componente | Descripción |
+| :----: | :------------------- | :---------- |
+| ![ESP32](other/esp32.png) | **Microcontrolador ESP32** | Cerebro central del vehículo autónomo. Cuenta con un procesador de doble núcleo, conectividad Wi-Fi/Bluetooth, y múltiples pines GPIO para gestionar la lectura de sensores (I2C y Analógicos) y el control de actuadores en tiempo real. |
+| ![Sensor Sharp](other/sensor_sharp.png) | **Sensor Infrarrojo Sharp GP2Y0A21 (#1 y #2)** | Sensores analógicos de medición de distancia por triangulación infrarroja. Colocados estratégicamente en el chasis para detectar obstáculos en las diagonales delanteras del vehículo y evitar colisiones de rango medio (10 a 80 cm). |
+| ![Sensor TOF](other/sensor_tof.png) | **Sensores de Distancia Láser TOF VL53L0X (#1 al #4)** | Sensores basados en tecnología Time-of-Flight (Tiempo de Vuelo) que miden distancias precisas mediante luz láser invisible. Conectados en paralelo al Bus I2C #1, utilizan pines digitales individuales como selectores de dirección (XSHUT) para evitar conflictos de direccionamiento. |
+| ![IMU BNO055](other/imu_bno055.png) | **IMU BNO055 (9-Axis Absolute Orientation)** | Unidad de medición inercial avanzada que integra acelerómetro, giroscopio y magnetómetro en 3 ejes, junto con un procesador interno que calcula la orientación absoluta (ángulos de Euler/Cuaterniones) de forma directa a través del Bus I2C #1. |
+| ![Sensor de Color TCS34725](other/tcs34725.png) | **Sensor de Color TCS34725** | Sensor de luz de color RGB con filtro infrarrojo. Conectado de forma independiente al Bus I2C #2 para evitar saturación de datos, está ubicado en la parte inferior del vehículo para identificar líneas, marcas y colores específicos en la pista. |
+| ![Tira Neopixel](other/neopixel.png) | **Tira de LEDs Neopixel** | Sistema de iluminación e indicadores visuales RGB direccionables de forma serial a través del pin digital D14. Se utiliza para mostrar estados del software, alertas del sistema o modos de conducción de forma dinámica. |
+| ![Buzzer](other/buzzer.png) | **Zumbador (Buzzer)** | Transductor piezoeléctrico conectado al pin digital D4. Emite señales acústicas y alarmas sonoras para retroalimentar las diferentes etapas del programa, fallos de lectura o alertas críticas del vehículo. |
+| ![Interruptor Programa](other/interruptor_programa.png) | **Interruptor de Inicio de Programa** | Pulsador/interruptor conectado al pin digital D23 con resistencia pull-up/GND. Actúa como gatillo lógico para iniciar la marcha autónoma del software una vez el vehículo ha sido calibrado y posicionado. |
+
+### Componentes de Alimentación y Actuación
+
+| Imagen | Nombre de Componente | Descripción |
+| :----: | :------------------- | :---------- |
+| ![Batería LIPO](other/bateria_lipo.png) | **Batería LiPo 2S 50C 2200mAh** | Fuente de energía principal del vehículo. Suministra un voltaje nominal de 7.4V (máximo de 8.4V en carga completa) con una alta tasa de descarga (50C) para soportar los picos de corriente de los motores. |
+| ![Interruptor](other/interruptor_potencia.png) | **Interruptor de Encendido General** | Interruptor basculante (ON/OFF) conectado directamente al terminal positivo de la batería para cortar o permitir el paso de corriente a todo el sistema eléctrico de forma segura. |
+| ![Step up-down XL6009](other/xl6009.png) | **Regulador Elevador/Reductor XL6009** | Módulo de regulación de voltaje ajustado entre 6V y 8V (según la velocidad buscada). Estabiliza la alimentación que va dirigida al driver de los motores, independientemente de las fluctuaciones de la batería. |
+| ![Driver TB6612FNG](other/tb6612fng.png) | **Driver de Motores TB6612FNG** | Controlador de puente en H dual de alta eficiencia. Recibe las señales lógicas de control del ESP32 (dirección y PWM) y maneja la potencia hacia los motores DC de tracción de manera mucho más eficiente que el clásico L298N. |
+| ![Motor 25GA-370](other/motor_370.png) | **Motor DC 25GA-370 (6V-8V)** | Motorreductor metálico encargado de la tracción mecánica del vehículo autónomo. Funciona en un rango de voltaje de 6V a 8V regulado por el XL6009 y operado a través del driver. |
+| ![Step down DSN-Mini 360 #1](other/mini360_1.png) | **Step Down DSN-Mini 360 (#1)** | Regulador reductor de voltaje de tipo conmutado, ajustado a una salida fija de 7V para alimentar de forma estable el pin VIN del microcontrolador ESP32. |
+| ![Step down DSN-Mini 360 #2](other/mini360_2.png) | **Step Down DSN-Mini 360 (#2)** | Regulador reductor de voltaje independiente ajustado a una salida fija de 5V. Se encarga de la alimentación general de potencia para el servomotor de dirección y la red de sensores. |
+| ![Servomotor MG90](other/servomotor_mg90.png) | **Servomotor MG90 180°** | Servo con piñonería metálica de alta resistencia. Utilizado para controlar el ángulo de dirección de las ruedas delanteras del vehículo mediante señales PWM del microcontrolador. Alimentado a 6V desde el regulador correspondiente. |
+
 ## Esquema de alimentacion:
    [Para ver versiones anteriores ver aqui.](#sistema-de-alimentación)
 ###  Versión 4:
