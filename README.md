@@ -39,17 +39,34 @@ Somos un equipo venezolano representando con orgullo a la **Universidad Politéc
 | ![Step down DSN-Mini 360](other/dsn_mini_360.jpg) | **Step Down DSN-Mini 360** | Regulador reductor de voltaje de tipo conmutado, ajustado a una salida fija de 7V para alimentar de forma estable el pin VIN del microcontrolador ESP32. |
 | ![Servomotor MG90](other/servo_180.jpg) | **Servomotor MG90 180°** | Servo con piñonería metálica de alta resistencia. Utilizado para controlar el ángulo de dirección de las ruedas delanteras del vehículo mediante señales PWM del microcontrolador. Alimentado a 6V desde el regulador correspondiente. |
 
-## Esquema de alimentacion:
-   [Para ver versiones anteriores ver aqui.](#sistema-de-alimentación)
-###  Versión 4:
+## Esquemas de Alimentación y Cableado
 
-![Diagrama de Alimentación 5](schemes/diagrama-alimentacion5.jpeg)
+[*Consultar el historial de versiones de alimentación aquí*](#sistema-de-alimentación)
 
-Luego del cambio del puente H a la nueva version hemos logrado eliminar la necesidad de un segundo esp32 para el control exclusivo de el motor.
+### Versión 4 (Actual)
 
-La **batería LiPo 2S de 2200mAh** (7.4V, con un máximo de 8.4V) sigue siendo la fuente principal de energía, conectada a un interruptor general. A partir de este punto, la alimentación se ramifica: una rama se dirige a un **step-up/down XL6009** ajustado a 7.5V, que a su vez alimenta el **puente H L298N**. Este entrega aproximadamente 6V al **Motor 25GA-370** tras su caída de voltaje interna. 
+![Diagrama de Alimentación V4](schemes/diagrama-alimentacion5.jpeg)
 
-De forma paralela, la batería alimenta dos módulos **step-down DSN-Mini 360**. El primero, configurado a 6V, proporciona energía al **ESP32 #**. El segundo módulo DSN-Mini 360, con un ajuste de 5V, se encarga de la alimentación general para el **Servomotor SG90 180°** y otros posibles sensores, ofreciendo una línea de voltaje estable y adecuada para estos componentes. Esta configuración ampliada permite una gestión de energía más distribuida y específica para las necesidades de cada subsistema del vehículo.
+### Arquitectura de Energía, Control y Gestión de Potencia
+
+La **batería LiPo 2S de 2200mAh** (7.4V nominales, 8.4V en máxima carga) constituye la fuente central de energía del sistema, gestionada mediante un **interruptor general físico de palanca** que garantiza un enclavamiento mecánico seguro y mitiga fallos por desconexión accidental ante vibraciones en la pista. 
+
+A partir de este nodo central, la alimentación se ramifica de forma completamente independiente en tres sub-buses regulados para aislar el ruido electromagnético y evitar caídas de tensión (*brownouts*) en la lógica de control:
+
+* **Línea de Tracción Potenciada:** Una rama se dirige a un regulador **step-up/down XL6009**, ajustado dinámicamente entre 6V y 8V en función de la velocidad requerida. Este módulo alimenta el **puente H TB6612FNG**, el cual entrega el voltaje íntegro al **Motor 25GA-370**.
+* **Línea de Control Confiable:** De forma paralela, un módulo **step-down DSN-Mini 360** configurado a 6V proporciona energía limpia al pin Vin del único **ESP32** del sistema, garantizando el diferencial necesario para el correcto funcionamiento de su regulador interno LDO sin riesgo de reinicios.
+* **Línea de Actuadores y Sensores:** Un segundo módulo **DSN-Mini 360**, calibrado estrictamente a 5V, se encarga de la alimentación general para el **Servomotor SG90 180°** y el resto de la red de sensores, ofreciendo una línea de voltaje estable y adecuada para las comunicaciones de datos.
+
+> [!IMPORTANT]
+> **Iteración Crítica de Hardware (L298N vs. TB6612FNG)**
+> 
+> La transición al puente H TB6612FNG resolvió dos fallos arquitectónicos graves de nuestro prototipo inicial. En primer lugar, eliminó la severa caída de voltaje interna característica del L298N, optimizando la eficiencia del par motor. En segundo lugar, el módulo L298N generaba una interferencia que inhabilitaba los puertos I2C de cualquier microcontrolador conectado. Este fallo nos había obligado temporalmente a utilizar una arquitectura ineficiente con dos placas ESP32 (una dedicada exclusivamente al control del motor). El cambio al TB6612FNG solucionó este conflicto de comunicaciones, permitiéndonos unificar todo el procesamiento en un único ESP32. Esto redujo drásticamente el peso, la complejidad del cableado, el consumo general de energía y los posibles puntos de fallo del vehículo.
+
+> [!NOTE]
+> **Compensación de diseño (*Trade-off*)**
+> 
+> Esta configuración ampliada, apoyada en tres reguladores de voltaje independientes, exige una gestión del espacio interno más rigurosa dentro del chasis impreso en 3D. Sin embargo, se asumió esta compensación espacial porque mitiga por completo el acoplamiento de ruido inductivo provocado por los motores hacia la electrónica sensible, blindando la estabilidad del vehículo y asegurando lecturas limpias en el bus I2C durante la navegación autónoma.
+
 
 ## Esquema de Sensores:
    [Para ver versiones anteriores aqui.](#sistema-de-detección-de-objetos)
