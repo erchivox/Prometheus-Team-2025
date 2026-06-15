@@ -74,9 +74,6 @@ Para asegurar las funciones que ya operaban de manera óptima, mantenemos en la 
 
 # PROMETHEUS TEAM — VEHÍCULO AUTÓNOMO WRO
 ## Guía de Estructura Mecánica, Prototipado y Manufactura para Competencia
-
-*Nota de uso: Este documento sirve como marco de referencia estructural y técnico para organizar el repositorio oficial de GitHub del equipo. Utiliza la lógica secuencial planteada a continuación para redactar el README.md principal o la sección de la categoría Future Engineers de la World Robot Olympiad (WRO).*
-
 ---
 
 ### 1. Filosofía de Rediseño y Prototipado Conceptual (Tinkercad)
