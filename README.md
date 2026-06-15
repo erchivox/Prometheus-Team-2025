@@ -72,6 +72,102 @@ Para asegurar las funciones que ya operaban de manera óptima, mantenemos en la 
 ---
 ##  Diseño Estructural y Sistema de Transmisión (V2)
 
+# PROMETHEUS TEAM — VEHÍCULO AUTÓNOMO WRO
+## Guía de Estructura Mecánica, Prototipado y Manufactura para Competencia
+
+*Nota de uso: Este documento sirve como marco de referencia estructural y técnico para organizar el repositorio oficial de GitHub del equipo. Utiliza la lógica secuencial planteada a continuación para redactar el README.md principal o la sección de la categoría Future Engineers de la World Robot Olympiad (WRO).*
+
+---
+
+### 1. Filosofía de Rediseño y Prototipado Conceptual (Tinkercad)
+
+El punto de partida de esta iteración consistió en un riguroso análisis de fallos del desempeño en los desafíos anteriores, identificando las penalizaciones mecánicas que restaron puntos críticos. El principal diagnóstico determinó que el antiguo chasis poseía una longitud excesiva, lo que degradaba la cinemática de giro del robot y le confería la poca agilidad de un camión comercial en lugar de un vehículo de carreras compacto. 
+
+Para mitigar este problema y acortar la plataforma al mínimo sin comprometer el espacio de los componentes, se fijó un objetivo de diseño estricto: lograr una **relación geométrica de proporción 1:1**. Esto significa igualar la distancia entre el eje delantero y trasero (*wheelbase*) con el ancho total del vehículo, maximizando la agilidad de la dirección.
+
+Antes de pasar al software de manufactura industrial, se validaron estas ideas espaciales construyendo un boceto conceptual rápido en Tinkercad. Este entorno ágil permitió evaluar formas para el tren motriz trasero. Inicialmente se consideró una transmisión por correa dentada, pero las limitaciones de suministro para conseguir longitudes a la medida obligaron a descartarla. En su lugar, Tinkercad sirvió para consolidar la arquitectura de engranajes en paralelo, permitiendo rotar la posición del motor y comprobar que la reducción longitudinal del chasis era viable.
+
+![PROTOTIPO CONCEPTUAL EN TINKERCAD](other/bocetoBase2026.jpeg)
+
+---
+
+### 2. Transición a CAD Profesional y Arquitectura de Monochasis (Onshape)
+
+Una vez demostrada la viabilidad del concepto de tren motriz, el diseño se trasladó a **Onshape** para desarrollar los modelos mecánicos de precisión listos para impresión 3D. La innovación central radica en la concepción de un **Monochasis** en el primer piso: una sola pieza estructural robusta que integra de forma nativa los soportes, canales y alojamientos, sustituyendo los ensambles múltiples y las fijaciones caseras del pasado.
+
+La plataforma final resultante posee unas dimensiones de **179 mm de largo por 115 mm de ancho**, integrando una distancia entre ejes de **~112 mm**, consolidando en el modelo físico la relación de proporción 1:1 buscada para una maniobrabilidad excepcional.
+
+![VISTA DE PLANTA DEL MONOCHASIS DE ONSHAPE](AQUÍ_VA_EL_ENLACE_A_TU_IMAGEN_2)
+
+#### Desglose Técnico del Tren Motriz y Primer Piso:
+* **Motor de Tracción:** Modelo JGA25 de 220 RPM con caja reductora metálica integrada para un torque óptimo en aceleraciones cortas. El monochasis incorpora una "cama" elevada calculada a la altura exacta para alinear los engranajes.
+* **Sistema Piñón-Corona:** Un piñón de 15 dientes acoplado directamente al eje del motor transmite la potencia a una corona de 25 dientes, generando una relación de torque extra que alivia el esfuerzo del motor.
+* **Eje Trasero e Ingenio de Taller:** Se implementó una varilla lisa de acero. Al no disponer de varillas de 4 mm comerciales, se adaptaron varillas de electrodos de soldadura de ~2.4 mm, incrementando su diámetro de manera uniforme en las zonas de contacto mediante tubo termocontraíble (espagueti térmico) para lograr un ajuste a presión (*press-fit*) sin holguras.
+* **Soportes Estructurales del Eje:** El eje gira sobre dos rodamientos de precisión 604 ZZ ZSG (4x12x4 mm) encajados en portarolineras integrados en las paredes laterales del monochasis. Las ruedas y la corona se fijan firmemente a la varilla mediante mordazas integradas tipo "C".
+* **Integración de Sensores:** La base del primer piso incluye alojamientos a medida para 4 sensores de tiempo de vuelo (ToF), 2 sensores analógicos Sharp y una cavidad inferior blindada para el sensor de color que evita la interferencia de la luz ambiental de la pista.
+
+---
+
+### 3. Validación de Tolerancias y Ensamble Virtual
+
+La mayor ventaja de utilizar Onshape fue la capacidad de realizar un **Ensamble Virtual completo** de todas las piezas mecánicas e impresas antes de iniciar la fabricación física en PETG. Este paso de control de calidad permitió simular el movimiento de los componentes y corregir interferencias críticas en las piezas de sujeción por mordaza.
+
+![VISTA EXPLOTADA O ENSAMBLE COMPLETO EN ONSHAPE]( )
+
+Durante la validación virtual, se optimizaron las uniones roscadas y los acoples de la mordaza para evitar fallos por fatiga. Un ejemplo clave de esta etapa de ingeniería fue el rediseño del sistema de apriete: al detectar virtualmente que el tornillo del soporte podía escapar hacia arriba por la fuerza de reacción, se transformó el sistema en una **Prensa en "C" estructural**. Se modificó la barra superior para contener una rosca interior ensanchada con tolerancia M11 y paso 3, mientras que la mordaza móvil recibió un bolsillo cilíndrico liso. Esto garantizó que el tornillo empujara el bloque móvil de forma lineal y confinada, impidiendo desajustes físicos bajo torsión.
+
+---
+
+### 4. Segundo Piso y Soporte del Teléfono para la Visión Computacional
+
+El segundo piso del chasis mantiene un perfil simétrico con respecto al primero pero cumple funciones de distribución de masa y sujeción del sistema de visión artificial (smartphone). En el diseño anterior, la batería se sujetaba de forma precaria con bridas plásticas (tirras) en la parte superior trasera. En el nuevo diseño, se integró un **compartimento ventilado dedicado justo debajo del primer piso**, bajando el centro de gravedad del vehículo y dejando la plataforma del segundo piso totalmente libre y limpia.
+
+![PORTABATERÍAS](AQUÍ_VA_EL_ENLACE_A_TU_IMAGEN_4)
+
+Para el soporte del teléfono, se diseñaron dos **torres aerodinámicas tipo aleta de tiburón (*Shark Fin*)**. Su geometría se eleva suavemente desde la zona media-trasera del chasis y traza una curva hacia el eje delantero. Esta trayectoria no es solo estética: permite transferir y distribuir el peso del smartphone de manera uniforme sobre las cuatro ruedas del vehículo, evitando sobrecargar el eje delantero y manteniendo una tracción constante. 
+
+Las torres cuentan con un sistema de movimiento que permite ajustar el ángulo de inclinación de la pantalla según las necesidades de la cámara. La mordaza móvil se desplaza por el canal de la mordaza fija guiada por el tornillo M10 superior. Además, para facilitar el transporte y mantenimiento, las torres incorporan 3 alojamientos en su base para **insertos roscados M3**, permitiendo desmontar todo el conjunto del soporte retirando los tornillos desde la parte inferior del segundo piso.
+
+![SOPORTE DEL TELÉFONO ONSHAPE]( )
+
+---
+
+### 5. Ingeniería de Manufactura Aditiva y Parámetros en PETG
+
+La traslación del modelo digital al mundo físico se realizó utilizando filamento **PETG** (un material de alta resistencia), procesado en una impresora 3D y laminado a través de Orca Slicer. Debido a que el PETG requiere una fusión térmica impecable para evitar la delaminación estructural ante las vibraciones de la pista, se diseñó un perfil de manufactura avanzado personalizado para nuestras necesidades:
+
+| Parámetro de Laminación | Valor Configurado | Justificación Técnica de Ingeniería |
+| :--- | :--- | :--- |
+| **Temperatura de Boquilla** | 260 °C | Maximiza la fluidez del PETG y la fuerza de unión intermolecular entre capas. |
+| **Flujo Volumétrico Máximo** | 11 - 12 mm³/s | Actúa como gobernador automático para que la extrusora no sufra sobrepresión. |
+| **Velocidad de Relleno** | 150 mm/s | Evita atascos por trituración de filamento en secciones de alta velocidad. |
+| **Perímetros Exteriores** | 5 Paredes | Crea una corteza estructural sólida que resiste el torque mecánico de las mordazas. |
+| **Ventilador de Capa** | 0% (Capas 1-3) / 40%-50% Máx | Previene el pandeo (*warping*) inicial y asegura una fusión sólida sin delaminar. |
+| **Estado de Cabina** | Abierta (Sin tapa superior) | Evita la fluencia térmica (*heat creep*) provocada por el sobrecalentamiento del motor de la extrusora. |
+
+#### Estrategias Avanzadas de Fabricación Aplicadas:
+
+1.  **Diseño para Manufactura Aditiva (DfAM) - División de Modelos:** Para piezas con geometrías complejas y voladizos de 90 grados, se utilizó la herramienta de corte en el laminador para dividirlas y orientarlas de forma 100% plana sobre la cama. La unión estructural se garantizó mediante la inserción de **clavijas guía independientes (*dowels*) de 2.5 mm**, configuradas con una tolerancia de tamaño de 0.15 mm para permitir un ajuste deslizante preciso (*slip-fit*). Las caras planas fueron sometidas a un proceso de lijado abrasivo manual antes de ser unidas de forma permanente con adhesivo de cianocrilato.
+2.  **Gestión de Componentes Microscópicos:** Las pequeñas clavijas mecánicas se distribuyeron en la misma bandeja de las piezas de gran tamaño. Esto permitió aprovechar el tiempo de traslación del cabezal como una ventana de **enfriamiento pasivo**, evitando que el filamento se derritiera por calor acumulado. Adicionalmente, se les aplicó un borde de adherencia exclusivo (*Brim* exterior de 5 mm) mediante el Modo Objeto de Orca Slicer para contrarrestar cualquier tirón o apalancamiento del filamento durante los viajes largos de la boquilla.
+3.  **Estandarización de Separadores:** Los separadores del chasis de 60 mm fueron fabricados a la medida exacta e integran insertos roscados M3 instalados por calor en sus extremos, superando las limitaciones intrínsecas de la impresión 3D para reproducir micro-roscas funcionales y garantizando un ensamblaje robusto y modular.
+
+---
+
+### RESUMEN DE LOGROS DE OPTIMIZACIÓN MECÁNICA (2025 VS 2026)
+
+* **✓ Maniobrabilidad:** Reducción del largo total del chasis logrando una relación perfecta de giro 1:1.
+* **✓ Robustez:** Transición de fijaciones externas de plástico a un Monochasis integrado de PETG con 5 perímetros de fuerza.
+* **✓ Visión Estable:** Reemplazo del trípode genérico inestable por un soporte de torres "Shark Fin" con distribución de carga uniforme e insertos roscados M3 metálicos desmontables.
+
+#### Continuidad en el Desarrollo de Software y Control:
+Es importante destacar que la arquitectura del firmware y la lógica de codificación del vehículo se mantienen exactamente idénticas a las implementadas con éxito en el diseño del año anterior. Debido a la fiabilidad demostrada en el procesamiento de datos y control cinemático, no se realizaron modificaciones de logica en el código base. 
+
+El código fuente optimizado y los scripts de control se encuentran totalmente accesibles a través de los siguientes hipervínculos oficiales:
+
+ * [Desarrollo de la Lógica de Vueltas a la Pista](#desarrollo-de-la-logica-de-vueltas-a-la-pista)
+ * [Desarrollo de la Lógica de Evasión de Objetos](#desarrollo-de-la-logica-de-evasion-de-objetos)
+
+
 Hemos rediseñado por completo el chasis y la mecánica del vehículo para maximizar su eficiencia en pista, mejorar la distribución de componentes y garantizar un rendimiento dinámico óptimo.
 
 ###  Optimización del Chasis y Distribución de Espacio
