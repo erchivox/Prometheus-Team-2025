@@ -1,10 +1,25 @@
 # Prometheus Team - Temporada 2026
-Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
+¡Bienvenidos al repositorio oficial de nuestro equipo para la World Robot Olympiad (WRO) - Categoría: Futuros Ingenieros! Este espacio no solo almacena líneas de código, algoritmos de visión artificial y diseños en 3D; aquí se guarda la evolución, la pasión y la ingeniería de un equipo que no se rinde ante los desafíos. Somos un equipo venezolano representando con orgullo a la **Universidad Politécnica Territorial José Félix Ribas (UPTJFR)**. Nuestro compromiso es la innovación y el aprendizaje continuo en el campo de la robótica autónoma. Queremos continuar lo que empezamos el año pasado y superar nuestros limites esta temporada.
 
 ##  Fotos de equipo
 | ![ Foto Oficial](t-photos/foto_equipo.jpeg)  | ![ Foto Equipo](t-photos/foto_equipo2.jpeg) | 
 | :----: | :---------- |
 
+---
+
+#🥈 La Hazaña de 2025: Subcampeones Nacionales
+El año 2025 quedó marcado en nuestra historia. Tras meses de arduo trabajo, diseño iterativo, depuración de sensores y perfeccionamiento de la lógica de navegación autónoma, logramos alzarnos con el 2do Lugar en la Competencia Nacional de Venezuela.
+
+Fue una jornada intensa donde pusimos a prueba nuestras capacidades técnicas bajo presión, enfrentándonos a los mejores equipos del país. Superamos obstáculos en la pista, calibramos componentes en tiempo récord y demostramos que la ingeniería venezolana tiene un nivel excepcional. Estuvimos a solo un paso de la gloria máxima, y esa experiencia nos transformó por completo como desarrolladores y pensadores críticos.
+
+#🥇 2026: Con la Mira en el Primer Lugar
+Dicen que el segundo lugar es el primer perdedor, pero para nosotros fue el combustible perfecto. Este año regresamos a la pista con más experiencia, una mentalidad más madura y un hambre voraz de victoria.
+
+Hemos analizado cada fallo del año pasado, rediseñado nuestra arquitectura de hardware y optimizado los algoritmos de control para que el robot sea más rápido, preciso e inteligente. No venimos a ver qué pasa; venimos a buscar ese 1er Lugar nacional y ganarnos el derecho de representar a Venezuela en el escenario mundial. La meta es clara y el equipo está listo.
+
+| El Prototipo (Diseño y Hardware) | La Competencia Nacional 2025 | El Equipo en Acción |
+| :---: | :---: | :---: |
+| <img src="URL_DE_TU_IMAGEN_1" width="300" alt="Diseño del robot"/> | <img src="URL_DE_TU_IMAGEN_2" width="300" alt="Segundo lugar nacional"/> | <img src="URL_DE_TU_IMAGEN_3" width="300" alt="Trabajando en el box"/> |
 
 ---
 ##  Fotos del vehiculo 
